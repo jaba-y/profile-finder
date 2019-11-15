@@ -31,10 +31,11 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     const searchText = this.searchForm.value.searchText;
+    const localData = localStorage.getItem(searchText);
     if (searchText) {
       this.setDataLoading();
-      if (localStorage.getItem(searchText)) {
-        this.data = JSON.parse(localStorage.getItem(searchText));
+      if (localData) {
+        this.data = JSON.parse(localData);
         this.fillData(this.data);
       } else {
         this.fetchProfile(searchText).subscribe(response => {
